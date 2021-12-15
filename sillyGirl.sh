@@ -11,7 +11,7 @@ color()
 hello(){
     echo 1.debian/kali
     echo 2.centos
-    echo 3.android
+    echo 3.android/arm64
     echo 4.退出
     read -p "配置Golang环境到什么系统：" i
     echo -e ${res}
