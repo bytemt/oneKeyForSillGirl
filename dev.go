@@ -13,5 +13,5 @@ import (
   	_ "github.com/cdle/sillyGirl/develop/fanli_tb"
 	//_ "github.com/cdle/sillyGirl/develop/onebyone"
 	_ "github.com/cdle/sillyGirl/develop/fanli_pdd"
- 	 _ "github.com/cdle/sillyGirl/develop/fanli_vip"
+ 	_ "github.com/cdle/sillyGirl/develop/fanli_vip"
 )
