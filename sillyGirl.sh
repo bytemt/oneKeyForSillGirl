@@ -20,19 +20,19 @@ change()
 {
     if [[ $i -eq 1 ]];then
         apt-get install wget -y
-        url=https://dl.google.com/go/go1.16.7.linux-amd64.tar.gz
+        url=https://golang.google.cn/dl/go1.17.5.linux-amd64.tar.gz
         wget $url
-        tar -C /usr/local -xzf go1.16.7.linux-amd64.tar.gz
+        tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
     elif [[ $i -eq 2 ]];then
         yum install wget -y
-        url=https://dl.google.com/go/go1.16.7.linux-amd64.tar.gz
+        url=https://golang.google.cn/dl/go1.17.5.linux-amd64.tar.gz
         wget $url
-        tar -C /usr/local -xzf go1.16.7.linux-amd64.tar.gz
+        tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
     elif [[ $i -eq 3 ]];then
         apt-get install wget -y
-        url=https://dl.google.com/go/go1.16.7.linux-arm64.tar.gz
+        url=https://golang.google.cn/dl/go1.17.5.linux-arm64.tar.gz
         wget $url
-        tar -C /usr/local -xzf go1.16.7.linux-amd64.tar.gz
+        tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
     elif [[ $i -eq 4 ]];then
         exit 1
     else
@@ -132,9 +132,9 @@ sillyGirl()
 
 if [ "$GOROOT" != "" ]; then
     echo "系统环境：$GOROOT，已存在"
-    echo "当前系统已经安装了Go环境，开始安装sillyGirl，需要飞机！！！"
+    echo "当前系统已经安装了Go环境，开始安装sillyGirl..."
     sillyGirl
 else
-    echo "当前系统未安装GO环境，开始安装Go环境，需要飞机！,如果没有飞机请选择退出！！！"
+    echo "当前系统未安装GO环境，开始安装Go环境..."
     maingo
 fi
