@@ -20,17 +20,17 @@ change()
 {
     if [[ $i -eq 1 ]];then
         apt-get install wget -y
-        url=https://golang.google.cn/dl/go1.17.5.linux-amd64.tar.gz
+        url=https://studygolang.com/dl/golang/go1.17.5.linux-amd64.tar.gz
         wget $url
         tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
     elif [[ $i -eq 2 ]];then
         yum install wget -y
-        url=https://golang.google.cn/dl/go1.17.5.linux-amd64.tar.gz
+        url=https://studygolang.com/dl/golang/go1.17.5.linux-amd64.tar.gz
         wget $url
         tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
     elif [[ $i -eq 3 ]];then
         apt-get install wget -y
-        url=https://golang.google.cn/dl/go1.17.5.linux-arm64.tar.gz
+        url=https://studygolang.com/dl/golang/go1.17.5.linux-arm64.tar.gz
         wget $url
         tar -C /usr/local -xzf go1.17.5.linux-arm64.tar.gz
     elif [[ $i -eq 4 ]];then
