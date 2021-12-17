@@ -24,7 +24,6 @@ hello(){
     echo "当前架构为：" $cpu
     sleep 3s
 }
-
 change()
 {
     if [[ "$os" == "debian"  &&  "$cpu" == "amd64" ]];then
@@ -136,7 +135,8 @@ sillyGirl()
     sleep 3s
     echo "拷贝js文件到sillyGirl目录"
     cp -r replies sillyGirl/develop/;
-    sleep 3s   
+    sleep 3s
+    
     echo "安装完成，开始享用吧!!!"
 }
 
