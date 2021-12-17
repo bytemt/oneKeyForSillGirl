@@ -87,7 +87,9 @@ sillyGirl()
         echo "当前存在sillyGirl目录,准备备份数据文件..."
         cp sillyGirl/sillyGirl.cache ./
         sleep 3s
-        echo "发现sillyGirl文件夹，删除中..."
+        echo "准备备份js文件..."
+        cp -r sillyGirl/develop/replies ./
+        echo "sillyGirl文件夹删除中..."
         rm -r sillyGirl
         sleep 3s
     fi
@@ -96,7 +98,7 @@ sillyGirl()
     git clone https://ghproxy.com/https://github.com/cdle/sillyGirl.git;
     #进入sillyGirl文件夹
     if [ $? -eq 0 ]; then 
-        sleep 10s
+        sleep 3s
         echo "进入sillyGirl文件夹..."
         cd $s
     fi
@@ -131,6 +133,10 @@ sillyGirl()
     echo "拷贝数据文件到sillyGirl目录"
     cp ./sillyGirl.cache sillyGirl/;
     sleep 3s
+    echo "拷贝js文件到sillyGirl目录"
+    cp -r replies sillyGirl/develop/;
+    sleep 3s
+    
     echo "安装完成，开始享用吧!!!"
 }
 
