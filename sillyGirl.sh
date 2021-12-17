@@ -53,7 +53,7 @@ maingo()
     GOPATH=/root/go
     GOBIN=/root/go/bin
     command='cat .profile|grep $ GOROOT'
-    if [-n "$command"];then
+    if [ -n "$command"];then
         echo -e ${yellow}
         echo -e ${res}
         exit 1
