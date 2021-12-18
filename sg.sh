@@ -1,80 +1,3 @@
-#!/bin/bash
-color()
-{
-    green='\e[1;32m'
-    res='\e[0m'
-    yellow='\e[1;33m'
-    echo -e ${green}
-    clear
-}
-
-hello(){
-    #!/bin/sh   
-    echo "检查系统..."
-    check=`uname  -a`
-    os=debian
-    cpu=arm64;
-    if [[ $check =~ "centos" ]];
-        then os="centos"
-    fi
-    if [[ $check =~ "x86_64" ]]; then
-        cpu="amd64"
-    fi
-    echo "当前系统为：" $os
-    echo "当前架构为：" $cpu
-    sleep 3s
-}
-change()
-{
-    if [[ "$os" == "debian"  &&  "$cpu" == "amd64" ]];then
-        apt-get install wget git -y
-        url=https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
-        wget $url
-        tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
-    elif [[ "$os" == "centos"  &&  "$cpu" == "amd64"  ]];then
-        yum install wget git -y
-        url=https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
-        wget $url
-        tar -C /usr/local -xzf go1.17.5.linux-arm64.tar.gz
-    elif [[ $cpu == "arm64" ]];then
-        apt-get install wget git -y
-        url=https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
-        wget $url
-        tar -C /usr/local -xzf go1.17.5.linux-arm64.tar.gz
-    else
-        exit 1
-    fi
-}
-
-maingo()
-{
-    color
-    GOROOT=/usr/local/go
-    GOPATH=/root/go
-    GOBIN=/root/go/bin
-    command='cat .profile|grep $ GOROOT'
-    if [-n "$command"];then
-        echo -e ${yellow}
-        echo -e ${res}
-        exit 1
-    else
-        hello
-        change
-        mkdir $HOME/go $HOME/go/src
-        echo "export GOROOT=${GOROOT}">>$HOME/.profile
-        echo "export GOPATH=${GOPATH}">>$HOME/.profile
-        echo "export GOBIN=${GOBIN}">>$HOME/.profile
-        echo "export PATH=\$PATH:${GOROOT}">>$HOME/.profile
-        . $HOME/.profile
-        echo -e ${green}
-        sleep 3s
-        echo "Go安装完成"
-        echo -e ${res}
-        sleep 10s
-    fi
-    sillyGirl
-}
-
 sillyGirl()
 {
     color
@@ -148,5 +71,6 @@ if [ "$GOROOT" != "" ]; then
     sillyGirl
 else
     echo "当前系统未安装GO环境，开始安装Go环境..."
-    maingo
+    sleep 3s
+    exit 1
 fi
