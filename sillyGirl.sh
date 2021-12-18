@@ -9,32 +9,38 @@ color()
 }
 
 hello(){
-    echo 1.debian/kali
-    echo 2.centos
-    echo 3.android/arm64
-    echo 4.退出
-    read -p "配置Golang环境到什么系统：" i
-    echo -e ${res}
+    #!/bin/sh   
+    echo "检查系统..."
+    check=`uname  -a`
+    os=debian
+    cpu=arm64;
+    if [[ $check =~ "centos" ]];
+        then os="centos"
+    fi
+    if [[ $check =~ "x86_64" ]]; then
+        cpu="amd64"
+    fi
+    echo "当前系统为：" $os
+    echo "当前架构为：" $cpu
+    sleep 3s
 }
 change()
 {
-    if [[ $i -eq 1 ]];then
-        apt-get install wget -y
-        url=https://studygolang.com/dl/golang/go1.17.5.linux-amd64.tar.gz
+    if [[ "$os" == "debian"  &&  "$cpu" == "amd64" ]];then
+        apt-get install wget git -y
+        url=https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
         wget $url
         tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
-    elif [[ $i -eq 2 ]];then
-        yum install wget -y
-        url=https://studygolang.com/dl/golang/go1.17.5.linux-amd64.tar.gz
-        wget $url
-        tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
-    elif [[ $i -eq 3 ]];then
-        apt-get install wget -y
-        url=https://studygolang.com/dl/golang/go1.17.5.linux-arm64.tar.gz
+    elif [[ "$os" == "centos"  &&  "$cpu" == "amd64"  ]];then
+        yum install wget git -y
+        url=https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
         wget $url
         tar -C /usr/local -xzf go1.17.5.linux-arm64.tar.gz
-    elif [[ $i -eq 4 ]];then
-        exit 1
+    elif [[ $cpu == "arm64" ]];then
+        apt-get install wget git -y
+        url=https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
+        wget $url
+        tar -C /usr/local -xzf go1.17.5.linux-arm64.tar.gz
     else
         exit 1
     fi
@@ -43,7 +49,7 @@ change()
 maingo()
 {
     color
-    GOROOT=/usr/local/go/bin
+    GOROOT=/usr/local/go
     GOPATH=/root/go
     GOBIN=/root/go/bin
     command='cat .profile|grep $ GOROOT'
@@ -61,20 +67,18 @@ maingo()
         echo "export PATH=\$PATH:${GOROOT}">>$HOME/.profile
         . $HOME/.profile
         echo -e ${green}
-        echo "OK"
+        sleep 3s
+        echo "Go安装完成"
         echo -e ${res}
+        sleep 10s
     fi
     sillyGirl
 }
 
 sillyGirl()
 {
-    s=sillyGirl;#检查系统是arm版还是x86_64版
-    echo "检查系统是arm版还是x86_64版..."
-    a=arm64;
-    if [[ $(uname -a | grep "x86_64") != "" ]];
-        then a=amd64;
-    fi ;
+    color
+    s=sillyGirl;#检查系统是arm版还是x86_64版   
     #如果当前系统存在sillyGirl，先杀死
     echo "检查当前系统是否有正在运行的sillyGirl..."
     pkill -9 $s;
@@ -83,7 +87,9 @@ sillyGirl()
         echo "当前存在sillyGirl目录,准备备份数据文件..."
         cp sillyGirl/sillyGirl.cache ./
         sleep 3s
-        echo "发现sillyGirl文件夹，删除中..."
+        echo "准备备份js文件..."
+        cp -r sillyGirl/develop/replies ./
+        echo "sillyGirl文件夹删除中..."
         rm -r sillyGirl
         sleep 3s
     fi
@@ -92,7 +98,7 @@ sillyGirl()
     git clone https://ghproxy.com/https://github.com/cdle/sillyGirl.git;
     #进入sillyGirl文件夹
     if [ $? -eq 0 ]; then 
-        sleep 10s
+        sleep 3s
         echo "进入sillyGirl文件夹..."
         cd $s
     fi
@@ -127,12 +133,18 @@ sillyGirl()
     echo "拷贝数据文件到sillyGirl目录"
     cp ./sillyGirl.cache sillyGirl/;
     sleep 3s
+    echo "拷贝js文件到sillyGirl目录"
+    cp -r replies sillyGirl/develop/;
+    sleep 3s
+    
     echo "安装完成，开始享用吧!!!"
 }
 
 if [ "$GOROOT" != "" ]; then
     echo "系统环境：$GOROOT，已存在"
+    sleep 3s
     echo "当前系统已经安装了Go环境，开始安装sillyGirl..."
+    sleep 3s
     sillyGirl
 else
     echo "当前系统未安装GO环境，开始安装Go环境..."
