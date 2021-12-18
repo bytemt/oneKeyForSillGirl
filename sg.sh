@@ -70,7 +70,7 @@ if [ "$GOROOT" != "" ]; then
     sleep 3s
     sillyGirl
 else
-    echo "当前系统未安装GO环境，开始安装Go环境..."
+    echo "当前系统未安装GO环境，请先安装Go环境..."
     sleep 3s
     exit 1
 fi
