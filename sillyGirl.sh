@@ -56,6 +56,7 @@ maingo()
     if [-n "$command"];then
         echo -e ${yellow}
         echo -e ${res}
+        sillyGirl
         exit 1
     else
         hello
